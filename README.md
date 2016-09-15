@@ -6,3 +6,4 @@ Basic input boxes for intrinsic/extrinsic parameters, then ...
    * [ ] Add mathjax formulas in the page
  * [ ] Duration in LIGO band as a function of frequency
  * [ ] horizon distance and average range
+ * [ ] seglen and sampling rate for MCMC
