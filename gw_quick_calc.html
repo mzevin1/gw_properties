@@ -34,9 +34,9 @@ MathJax.Hub.Config({
 <a name="chirpMass"></a>
 <form id="chirpMass" action="">
 <fieldset>
-	<legend>Chirp Mass</legend>
+	<legend>Chirp Mass and Symmetric Mass Ratio</legend>
 	
-$$\mathcal{M}_{c} = \frac{(M_1 M_2)^{3/5}}{(M_1+M_2)^{1/5}}$$
+$$\mathcal{M}_{c} = \frac{(M_1 M_2)^{3/5}}{(M_1+M_2)^{1/5}}\qquad\eta=\frac{M_1M_2}{(M_1+M_2)^2}$$
 	
 	<p>
 		<label for="M1">$M_{1}\ (M_{\odot}$)</label>
@@ -47,13 +47,16 @@ $$\mathcal{M}_{c} = \frac{(M_1 M_2)^{3/5}}{(M_1+M_2)^{1/5}}$$
 		<input id="M2" name="M2" type="float" />
 	</p>
 	<p>
-		<input type="submit" value="Calculate chirp mass" />
+		<input type="submit" value="Calculate chirp mass and sym. mass ratio" />
 		or
 		<input type="reset" value="Reset" />
 	</p>
 	<p>
 		<label for="M_chirp">$\mathcal{M}_{c}\ (M_{\odot}$)</label>
 		<input id="M_chirp" name="M_chirp" type="float" />
+        <br />
+        <label for="eta">$\eta$</label>
+		<input id="eta" name="eta" type="float" />
 	</p>
 </fieldset>
 </form>
@@ -66,11 +69,18 @@ $$\mathcal{M}_{c} = \frac{(M_1 M_2)^{3/5}}{(M_1+M_2)^{1/5}}$$
 		Mc = Math.pow((M1*M2),(3/5)) / Math.pow((M1+M2),(1/5));
 		return Mc.toFixed(2)
 	}
+	function calculateEta(M1, M2) {
+		M1 = parseFloat(M1);
+        M2 = parseFloat(M2);
+        eta = (M1*M2)/Math.pow((M1 + M2), 2);
+		return eta.toFixed(5)
+	}
 
 	var chirpMass = document.getElementById("chirpMass");
 	if (chirpMass) {
 		chirpMass.onsubmit = function () {
 			this.M_chirp.value = calculateChirpMass(this.M1.value, this.M2.value);
+			this.eta.value = calculateEta(this.M1.value, this.M2.value);
 			return false;
 		};
 	}
