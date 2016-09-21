@@ -21,8 +21,9 @@ MathJax.Hub.Config({
 <body>
 
 <!-- Create anchors for each calculation to find what you need easier -->
-<div></div><a href="#chirpMass">Chirp Mass</a>
+<div></div><a href="#chirpMass">Chirp Mass & Symmetric Mass Ratio</a>
 <div></div><a href="#gwLuminosity">Gravitational Wave Luminosity</a>
+<div></div><a href="#spins">Aligned and In-Plane Spins</a>
 <div></div><a href="#timeBand">Time to merger</a>
 <div></div><a href="#orbitalSep">Orbital Separation</a>
 <div></div><a href="#schwarzRad">Schwarzschild Radius</a>
@@ -30,7 +31,7 @@ MathJax.Hub.Config({
 
 
 <br></br>
-<!-- Chirp Mass -->
+<!-- Chirp Mass & Symmetric Mass Ratio-->
 <a name="chirpMass"></a>
 <form id="chirpMass" action="">
 <fieldset>
@@ -39,11 +40,11 @@ MathJax.Hub.Config({
 $$\mathcal{M}_{c} = \frac{(M_1 M_2)^{3/5}}{(M_1+M_2)^{1/5}}\qquad\eta=\frac{M_1M_2}{(M_1+M_2)^2}$$
 	
 	<p>
-		<label for="M1">$M_{1}\ (M_{\odot}$)</label>
+		<label for="M1">$M_{1}\ (M_{\odot})$</label>
 		<input id="M1" name="M1" type="float" />
 	</p>
 	<p>
-		<label for="M2">$M_{2}\ (M_{\odot}$)</label>
+		<label for="M2">$M_{2}\ (M_{\odot})$</label>
 		<input id="M2" name="M2" type="float" />
 	</p>
 	<p>
@@ -52,9 +53,10 @@ $$\mathcal{M}_{c} = \frac{(M_1 M_2)^{3/5}}{(M_1+M_2)^{1/5}}\qquad\eta=\frac{M_1M
 		<input type="reset" value="Reset" />
 	</p>
 	<p>
-		<label for="M_chirp">$\mathcal{M}_{c}\ (M_{\odot}$)</label>
+		<label for="M_chirp">$\mathcal{M}_{c}\ (M_{\odot})$</label>
 		<input id="M_chirp" name="M_chirp" type="float" />
-        <br />
+    </p>
+    <p>
         <label for="eta">$\eta$</label>
 		<input id="eta" name="eta" type="float" />
 	</p>
@@ -146,6 +148,90 @@ $$Assuming\ equal\ mass\ (M_{1}=M_{2}=M,\ so\ R_{1}=R_{2}=R)\ and\ circular\ orb
 
 
 
+<br></br>
+<!-- Aligned and In-Plane Spins-->
+<a name="spins"></a>
+<form id="spins" action="">
+<fieldset>
+	<legend>Aligned and In-Plane Spins</legend>
+	
+$$\chi_{eff} = \frac{M_{1} * \vec{S_{1}} + M_{2} * \vec{S_{2}}}{M_{1} + M_{2}} \cdot \frac{\vec{L}}{|L|} = \frac{M_{1} * S_{1z} + M_{2} * S_{2z}}{M_{1} + M_{2}} = \frac{M_{1}S_{1}cos(\theta_{1}) + M_{2}S_{2}cos(\theta_{2})}{M_{1} + M_{2}}$$
+
+$$\chi_{P} = \frac{M_{1} * \vec{S_{1}} + M_{2} * \vec{S_{2}}}{M_{1} + M_{2}} \times \frac{\vec{L}}{|L|} = \frac{M_{1} * \sqrt{S_{1x}^{2}+S_{1y}^{2}} + M_{2} * \sqrt{S_{2x}^{2}+S_{2y}^{2}}}{M_{1} + M_{2}} = \frac{M_{1}S_{1}sin(\theta_{1}) + M_{2}S_{2}sin(\theta_{2})}{M_{1} + M_{2}}$$
+	
+	<p>
+		<label for="M1">$M_{1}\ (M_{\odot})$</label>
+		<input id="M1" name="M1" type="float" />
+	</p>
+	<p>
+		<label for="M2">$M_{2}\ (M_{\odot})$</label>
+		<input id="M2" name="M2" type="float" />
+	</p>
+	<p>
+		<label for="s1">$S_{1}\ (0-1)$</label>
+		<input id="s1" name="s1" type="float" />
+	</p>
+	<p>
+		<label for="s2">$S_{2}\ (0-1)$</label>
+		<input id="s2" name="s2" type="float" />
+	</p>
+	<p>
+		<label for="theta1">$\theta_{1}\ (rad)$</label>
+		<input id="theta1" name="theta1" type="float" />
+	</p>
+	<p>
+		<label for="theta2">$\theta_{2}\ (rad)$</label>
+		<input id="theta2" name="theta2" type="float" />
+	</p>
+	<p>
+		<input type="submit" value="Calculate chirp mass and sym. mass ratio" />
+		or
+		<input type="reset" value="Reset" />
+	</p>
+	<p>
+		<label for="chi_a">$\chi_{a}$</label>
+		<input id="chi_a" name="chi_a" type="float" />
+    </p>
+    <p>
+        <label for="chi_p">$\chi_{p}$</label>
+		<input id="chi_p" name="chi_p" type="float" />
+	</p>
+</fieldset>
+</form>
+
+<script>
+(function () {
+	function calculateChi_a(M1, M2, s1, s2, theta1, theta2) {
+		m1 = parseFloat(M1);
+        m2 = parseFloat(M2);
+        s1 = parseFloat(s1);
+        s2 = parseFloat(s2);
+        t1 = parseFloat(theta1)
+        t2 = parseFloat(theta2)
+		chi_a = (m1*s1*Math.cos(t1)+m2*s2*Math.cos(t2)) / (m1+m2);
+		return chi_a.toFixed(2)
+	}
+	function calculateChi_p(M1, M2, s1, s2, theta1, theta2) {
+		m1 = parseFloat(M1);
+        m2 = parseFloat(M2);
+        s1 = parseFloat(s1);
+        s2 = parseFloat(s2);
+        t1 = parseFloat(theta1)
+        t2 = parseFloat(theta2)
+		chi_p = (m1*s1*Math.sin(t1)+m2*s2*Math.sin(t2)) / (m1+m2);
+		return chi_p.toFixed(2)
+	}
+
+	var spins = document.getElementById("spins");
+	if (spins) {
+		spins.onsubmit = function () {
+			this.chi_a.value = calculateChi_a(this.M1.value, this.M2.value, this.s1.value, this.s2.value, this.theta1.value, this.theta2.value);
+			this.chi_p.value = calculateChi_p(this.M1.value, this.M2.value, this.s1.value, this.s2.value, this.theta1.value, this.theta2.value);
+			return false;
+		};
+	}
+}());
+</script>
 
 <br></br>
 <!-- Time in band -->
