@@ -23,7 +23,7 @@ MathJax.Hub.Config({
 <!-- Create anchors for each calculation to find what you need easier -->
 <div></div><a href="#chirpMass">Chirp Mass</a>
 <div></div><a href="#gwLuminosity">Gravitational Wave Luminosity</a>
-<div></div><a href="#timeBand">Time in LIGO Band</a>
+<div></div><a href="#timeBand">Time to merger</a>
 <div></div><a href="#orbitalSep">Orbital Separation</a>
 <div></div><a href="#schwarzRad">Schwarzschild Radius</a>
 
@@ -36,7 +36,7 @@ MathJax.Hub.Config({
 <fieldset>
 	<legend>Chirp Mass</legend>
 	
-$$\mathcal{M}_{c} = \frac{(M1*M2)^{3/5}}{(M1+M2)^{1/5}}$$
+$$\mathcal{M}_{c} = \frac{(M_1 M_2)^{3/5}}{(M_1+M_2)^{1/5}}$$
 	
 	<p>
 		<label for="M1">$M_{1}\ (M_{\odot}$)</label>
@@ -99,7 +99,7 @@ $$Assuming\ equal\ mass\ (M_{1}=M_{2}=M,\ so\ R_{1}=R_{2}=R)\ and\ circular\ orb
 		<input id="f" name="f" type="float" />
 	</p>
 	<p>
-		<input type="submit" value="Calculate time in the LIGO band" />
+		<input type="submit" value="Calculate GW luminosity" />
 		or
 		<input type="reset" value="Reset" />
 	</p>
@@ -145,7 +145,7 @@ $$Assuming\ equal\ mass\ (M_{1}=M_{2}=M,\ so\ R_{1}=R_{2}=R)\ and\ circular\ orb
 	<legend>Time in Band</legend>
 	
 
-$$t_{LIGO} = 2.18 * \Big{(}\frac{1.21}{\mathcal{M}_{c}}\Big{)}^{5/3} * \Big{(}\frac{100}{f_{low}}\Big{)}^{8/3}$$
+$$t_{merg} = 2.18 \left(\frac{1.21}{\mathcal{M}_{c}}\right)^{5/3} \left(\frac{100}{f_{\textrm{low}}}\right)^{8/3}$$
 	
 	<p>
 		<label for="Mc">$\mathcal{M}_{c}\ (M_{\odot}$)</label>
@@ -156,7 +156,7 @@ $$t_{LIGO} = 2.18 * \Big{(}\frac{1.21}{\mathcal{M}_{c}}\Big{)}^{5/3} * \Big{(}\f
 		<input id="f_low" name="f_low" type="float" />
 	</p>
 	<p>
-		<input type="submit" value="Calculate time in the LIGO band" />
+		<input type="submit" value="Calculate time to merger from a given starting frequency" />
 		or
 		<input type="reset" value="Reset" />
 	</p>
