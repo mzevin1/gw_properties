@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Gravitational Wave Calculations</title>
+</head>
+
+
+<script type="text/javascript"
+  src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$']],
+    preview: ["[math]"],
+    processEscapes: true
+  }
+});
+ </script>
+
+<h1>Gravitational Wave Calculations</h1>
+<body>
+
+
+
+<!-- Chirp Mass -->
+	
+<form id="chirpMass" action="">
+<fieldset>
+	<legend>Chirp Mass</legend>
+	
+$$\mathcal{M}_{c} = \frac{(M1*M2)^{3/5}}{(M1+M2)^{1/5}}$$
+	
+	<p>
+		<label for="M1">M1 (M_sun)</label>
+		<input id="M1" name="M1" type="number" />
+	</p>
+	<p>
+		<label for="M2">M2 (M_sun)</label>
+		<input id="M2" name="M2" type="number" />
+	</p>
+	<p>
+		<input type="submit" value="Calculate chirp mass" />
+		or
+		<input type="reset" value="Reset" />
+	</p>
+	<p>
+		<label for="M_chirp">M_chirp (M_sun)</label>
+		<input id="M_chirp" name="M_chirp" type="number" />
+	</p>
+</fieldset>
+</form>
+
+<script>
+(function () {
+	function calculateChirpMass(M1, M2) {
+		m1 = parseFloat(M1);
+        m2 = parseFloat(M2);
+		return Math.pow((m1*m2),(3/5)) / Math.pow((m1+m2),(1/5));
+	}
+
+	var chirpMass = document.getElementById("chirpMass");
+	if (chirpMass) {
+		chirpMass.onsubmit = function () {
+			this.M_chirp.value = calculateChirpMass(this.M1.value, this.M2.value);
+			return false;
+		};
+	}
+}());
+</script>
+
+
+<!-- Time in band -->
+<form id="timeinBand" action="">
+<fieldset>
+	<legend>Time in Band</legend>
+	
+
+$$t_{LIGO} = 2.18 * (\frac{1.21}{\mathcal{M}_{c}})^{5/3} * (\frac{100}{f_{low}})^{8/3}$$
+	
+	<p>
+		<label for="Mc">M_chirp (M_Sun)</label>
+		<input id="Mc" name="Mc" type="number" />
+	</p>
+	<p>
+		<label for="f_low">f_low (Hz)</label>
+		<input id="f_low" name="f_low" type="number" />
+	</p>
+	<p>
+		<input type="submit" value="Calculate time in the LIGO band" />
+		or
+		<input type="reset" value="Reset" />
+	</p>
+	<p>
+		<label for="t_band">Time in Band (s)</label>
+		<input id="t_band" name="t_band" type="number" />
+	</p>
+</fieldset>
+</form>
+
+
+<script>
+(function () {
+	function calculateTimeinBand(Mc, f_low) {
+		mc = parseFloat(Mc);
+        flow = parseFloat(f_low);
+		return 2.18 * Math.pow((1.21 / mc),(5/3)) * Math.pow((100 / flow),(8/3));
+	}
+
+	var t = document.getElementById("t_band");
+	if (t) {
+		t.onsubmit = function () {
+			this.t_band.value = calculateTimeinBand(this.Mc.value, this.f_low.value);
+			return false;
+		};
+	}
+}());
+</script>
+
+</body>
+</html>
