@@ -23,6 +23,7 @@ MathJax.Hub.Config({
 <!-- Create anchors for each calculation to find what you need easier -->
 <div></div><a href="#chirpMass">Chirp Mass & Symmetric Mass Ratio</a>
 <div></div><a href="#gwLuminosity">Gravitational Wave Luminosity</a>
+<div></div><a href="#lumDistance">Luminosity Distance</a>
 <div></div><a href="#spins">Aligned and In-Plane Spins</a>
 <div></div><a href="#timeBand">Time to merger</a>
 <div></div><a href="#orbitalSep">Orbital Separation</a>
@@ -140,6 +141,59 @@ $$Assuming\ equal\ mass\ (M_{1}=M_{2}=M,\ so\ R_{1}=R_{2}=R)\ and\ circular\ orb
 	if (gwLuminosity) {
 		gwLuminosity.onsubmit = function () {
 			this.L.value = calculateGWLuminosity(this.M.value, this.f.value);
+			return false;
+		};
+	}
+}());
+</script>
+
+
+
+<br></br>
+<!-- Luminosity Distance -->
+<a name="lumDistance"></a>
+<form id="lumDistance" action="">
+<fieldset>
+	<legend>Luminosity Distance</legend>
+	
+
+$$L_{GW} =\  \sim\frac{c^{3}d_{L}^{2}}{4G}|\dot{h}|^{2}\ \sim\ \frac{c^{5}}{4G}\Big{(}\frac{\omega_{GW}d_{L}h|_{max}}{c}\Big{)}^{2}$$
+$$d_{L}\ \sim\ 45000 Mpc\frac{Hz}{f_{GW_{max}}}\frac{10^{-21}}{h_{max}}$$
+	
+	<p>
+		<label for="h">Peak Strain</label>
+		<input id="h" name="h" type="float" />
+	</p>
+	<p>
+		<label for="f">Peak GW frequency (Hz)</label>
+		<input id="f" name="f" type="float" />
+	</p>
+	<p>
+		<input type="submit" value="Calculate Luminosity Distance" />
+		or
+		<input type="reset" value="Reset" />
+	</p>
+	<p>
+		<label for="dL">Luminosity Distance (Mpc)</label>
+		<input id="dL" name="dL" type="float" />
+	</p>
+</fieldset>
+</form>
+
+
+<script>
+(function () {
+	function calculateLumDistance(h, f) {
+		h = parseFloat(h);
+        f = parseFloat(f);
+		dL = 45000*1e-21*(1/f)*(1/h);
+		return dL.toFixed(2)
+	}
+
+	var lumDistance = document.getElementById("lumDistance");
+	if (lumDistance) {
+		lumDistance.onsubmit = function () {
+			this.dL.value = calculateLumDistance(this.h.value, this.f.value);
 			return false;
 		};
 	}
