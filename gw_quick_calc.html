@@ -347,7 +347,7 @@ $$t_{merg} = 2.18 \left(\frac{1.21}{\mathcal{M}_{c}}\right)^{5/3} \left(\frac{10
 	<legend>Orbital Separation (Keplerian)</legend>
 	
 
-$$R = \Big{(}\frac{G(M_{1}+M_{2})}{4\pi^{2}f^{2}}\Big{)}^{1/3}$$
+$$a = \Big{(}\frac{G(M_{1}+M_{2})}{4\pi^{2}f^{2}}\Big{)}^{1/3}$$
 	
 	<p>
 		<label for="M1">$M_{1}\ (M_{\odot}$)</label>
@@ -367,8 +367,8 @@ $$R = \Big{(}\frac{G(M_{1}+M_{2})}{4\pi^{2}f^{2}}\Big{)}^{1/3}$$
 		<input type="reset" value="Reset" />
 	</p>
 	<p>
-		<label for="R">Orbital Separation (km)</label>
-		<input id="R" name="R" type="float" />
+		<label for="a">Orbital Separation (km)</label>
+		<input id="a" name="a" type="float" />
 	</p>
 </fieldset>
 </form>
@@ -381,14 +381,14 @@ $$R = \Big{(}\frac{G(M_{1}+M_{2})}{4\pi^{2}f^{2}}\Big{)}^{1/3}$$
 		M1 = parseFloat(M1) * 2.0 * Math.pow(10, 30);
 		M2 = parseFloat(M2) * 2.0 * Math.pow(10, 30);
 		f = parseFloat(f);  // Note: f_GW = 2*f_orb
-		R = Math.pow(G*(M1+M2)/Math.pow(f*Math.PI,2), 1/3);
-		return (R/1000).toFixed(2)
+		a = Math.pow(G*(M1+M2)/Math.pow(f*Math.PI,2), 1/3);
+		return (a/1000).toFixed(2)
 	}
 
 	var orbitalSep = document.getElementById("orbitalSep");
 	if (orbitalSep) {
 		orbitalSep.onsubmit = function () {
-			this.R.value = calculateOrbitalSep(this.M1.value, this.M2.value, this.f.value);
+			this.a.value = calculateOrbitalSep(this.M1.value, this.M2.value, this.f.value);
 			return false;
 		};
 	}
